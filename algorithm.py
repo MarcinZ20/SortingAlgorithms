@@ -121,6 +121,8 @@ class Algorithm():
             algorithms.selectSort(array)
         elif self.id == 4:
             algorithms.mergeSort(array)
+        elif self.id == 5:
+            algorithms.quickSort(array, 0, len(array) - 1)
 
         print(f"\n{table.name} po sortowaniu: ")
 

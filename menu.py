@@ -36,7 +36,7 @@ class Menu:
             static method containing main program loop
     """
 
-    inputList = [1,2,3,4]
+    inputList = [1,2,3,4,5]
     mainScreenMessage = """
     - - - - - - - - - - - - - - - - - - -
     
@@ -46,6 +46,7 @@ class Menu:
     2 -> Insertion Sort
     3 -> Select Sort
     4 -> Merge Sort
+    5 -> Quick Sort
     
     - - - - - - - - - - - - - - - - - - -
     """
