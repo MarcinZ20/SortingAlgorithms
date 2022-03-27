@@ -98,7 +98,7 @@ class Table:
         array = []
 
         for i in range(size):
-            array.append(random.randint(0,1000))
+            array.append(random.randint(0,100))
 
         return array
 

@@ -1,11 +1,14 @@
 import numpy as np
+import math
 
 availableAlgorythms = {
         1: "Bubble Sort",
         2: "Insertion Sort",
         3: "Selection Sort",
         4: "Merge Sort",
-        5: "Quick Sort"
+        5: "Quick Sort",
+        7: "Bucket Sort",
+        8: "Counting Sort"
     }
     
 
@@ -136,3 +139,53 @@ def partition(table: np.ndarray, left: int, right: int) -> int:
     
     return j
 
+def bucketSort(table: np.ndarray) -> None:
+
+    # ustalam ilośc bucketow
+    bucketsNumber = int(math.sqrt(len(table)))
+
+    # iterować po tablicy, dzielić elementy przez bucketsNumber i wkładać do odpowiednich kontenerów
+    buckets = [[] for i in range(bucketsNumber)]
+    bucketList = [i for i in range(bucketsNumber)]
+
+    for value in table:
+        suggestedBucket = value // bucketsNumber
+        if suggestedBucket in bucketList:
+            buckets[suggestedBucket].append(value)
+        else:
+            buckets[-1].append(value)
+    
+    for i in range(bucketsNumber):
+        list(insertionSort(np.array(buckets[i])))
+
+    tabIndex = 0
+
+    for bucket in buckets:
+        for item in bucket:
+            table[tabIndex] = item
+            tabIndex += 1
+
+
+
+def countingSort(table: np.ndarray) -> None:
+    """
+        A function to represent Counting Sort algorithm    
+
+    Args:
+        table (np.ndarray): array to be sorted
+    """
+
+    maximum = max(table)
+
+    indexTab = np.zeros(maximum + 1)
+
+    for number in table:
+        indexTab[number] += 1
+
+    tabPointer = 0
+
+    for index, value in enumerate(indexTab):
+        if value != 0:
+            for _ in range(int(value)):
+                table[tabPointer] = index
+                tabPointer += 1
