@@ -123,11 +123,15 @@ class Algorithm():
             algorithms.mergeSort(array)
         elif self.id == 5:
             algorithms.quickSort(array, 0, len(array) - 1)
+        elif self.id == 6:
+            algorithms.heapSort(array)
         elif self.id == 7:
             algorithms.bucketSort(array)
         elif self.id == 8:
             algorithms.countingSort(array)
+        elif self.id == 9:
+            algorithms.positionSort(array)
 
-        print(f"\n{table.name} po sortowaniu: ")
+        print(f"\n{table.name} po sortowaniu algorytmem {algorithms.availableAlgorythms[self.id]}: ")
 
         table.printTable()

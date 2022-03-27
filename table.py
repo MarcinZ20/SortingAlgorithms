@@ -1,8 +1,8 @@
-from itertools import count
+from dataclasses import dataclass
 import numpy as np
 import random
 
-
+@dataclass
 class Table:
     """
         A class to represent array of numbers in the program

@@ -36,7 +36,7 @@ class Menu:
             static method containing main program loop
     """
 
-    inputList = [1,2,3,4,5,7,8]
+    inputList = [1,2,3,4,5,6,7,8,9]
     mainScreenMessage = """
     - - - - - - - - - - - - - - - - - - -
     
@@ -50,6 +50,7 @@ class Menu:
     6 -> Heap Sort
     7 -> Bucket Sort
     8 -> Counting Sort
+    9 -> Position Sort
     
     - - - - - - - - - - - - - - - - - - -
     """

@@ -1,6 +1,6 @@
 # Algorytmy Sortowania
 
-Projekt ma na celu implementacje podstawowych algorytmów sortowania. 
+Projekt ma na celu implementacje i przedstawienie działania podstawowych algorytmów sortowania. 
 
 ### Wykorzystane technologie
  - Python 3
@@ -11,6 +11,11 @@ Projekt ma na celu implementacje podstawowych algorytmów sortowania.
  - Sortowanie przez wstawianie
  - Sortowanie przez wybieranie
  - Sortowanie przez scalanie
+ - Quick Sort
+ - Heap Sort
+ - Bucket Sort
+ - Sortowanie przez zliczanie
+ - Position Sort
 
 ### Uruchomienie aplikacji
 1. Zainstaluj [Python](https://www.python.org/downloads) w najnowszej wersji

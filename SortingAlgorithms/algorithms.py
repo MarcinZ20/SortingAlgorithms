@@ -1,5 +1,5 @@
 import numpy as np
-import math
+import operator 
 
 availableAlgorythms = {
         1: "Bubble Sort",
@@ -7,8 +7,10 @@ availableAlgorythms = {
         3: "Selection Sort",
         4: "Merge Sort",
         5: "Quick Sort",
+        6: "Heap Sort",
         7: "Bucket Sort",
-        8: "Counting Sort"
+        8: "Counting Sort",
+        9: "Position Sort"
     }
     
 
@@ -100,7 +102,12 @@ def mergeSort(table: np.ndarray) -> None:
             table[c] = right[r]
             r += 1
             c += 1
-            
+        
+
+
+                ##### ---------------------------- TODO: Zadanie 2 ---------------------------- #####
+
+
 def quickSort(table: np.ndarray, left: int, right: int) -> None:
     """
         A function to represent Quick Sort algorithm    
@@ -139,32 +146,87 @@ def partition(table: np.ndarray, left: int, right: int) -> int:
     
     return j
 
-def bucketSort(table: np.ndarray) -> None:
+def heapSort(table: np.ndarray) -> None:
+    """
+        A function to represent Heap sort algorithm   
 
-    # ustalam ilośc bucketow
-    bucketsNumber = int(math.sqrt(len(table)))
+    Args:
+        table (np.ndarray): array to be sorted
+    """
 
-    # iterować po tablicy, dzielić elementy przez bucketsNumber i wkładać do odpowiednich kontenerów
-    buckets = [[] for i in range(bucketsNumber)]
-    bucketList = [i for i in range(bucketsNumber)]
+    length = len(table)
+  
+    for i in range(length//2, -1, -1):
+        heapify(table, length, i)
+  
+    for i in range(length-1, 0, -1):
+        table[i], table[0] = table[0], table[i]
+        heapify(table, i, 0)
 
-    for value in table:
-        suggestedBucket = value // bucketsNumber
-        if suggestedBucket in bucketList:
-            buckets[suggestedBucket].append(value)
-        else:
-            buckets[-1].append(value)
+def heapify(table: int, length: int, head: int):
+    """
+        A function to represent heapify part of heap sort algorithm   
+
+    Args:
+        table (np.ndarray): array to be sorted
+        length (int): length of the array part
+        head (int): head node 
+    """
     
-    for i in range(bucketsNumber):
-        list(insertionSort(np.array(buckets[i])))
+    left = 2 * head + 1 
+    right = 2 * head + 2 
 
-    tabIndex = 0
+    values = {head: table[head]}
+
+    if left < length:
+        values[left] = table[left]
+
+    if right < length:
+        values[right] = table[right]
+
+    largest = max(values.items(), key=operator.itemgetter(1))[0]
+
+    # If root is not largest, swap with largest and continue heapifying
+    if largest != head:
+        table[head], table[largest] = table[largest], table[head]
+        heapify(table, length, largest)
+
+def bucketSort(table: np.ndarray) -> None:
+    """
+        A function to represent Bucket sort algorithm   
+
+    Args:
+        table (np.ndarray): array to be sorted
+    """
+
+    max_number = np.max(table)
+
+    # Ustalam rozmiar bucketow
+    size = max_number / len(table)
+
+    buckets = [[] for i in range(len(table))]
+
+    # wkładam elementy do odpowiednich bucketow
+    for number in table:
+
+        bucketIndex = int(number // size)
+
+        if (bucketIndex >= len(table)):
+            buckets[bucketIndex - 1].append(int(number))
+        else:
+            buckets[bucketIndex].append(int(number))
+
+    # sortuje buckety
+    for bucket in buckets:
+        insertionSort(bucket)
+
+    # dodaje odpowiednio w kolejnosci elementy do tablicy
+    tableIndex = 0
 
     for bucket in buckets:
-        for item in bucket:
-            table[tabIndex] = item
-            tabIndex += 1
-
+        for number in bucket:
+            table[tableIndex] = number
+            tableIndex += 1
 
 
 def countingSort(table: np.ndarray) -> None:
@@ -189,3 +251,49 @@ def countingSort(table: np.ndarray) -> None:
             for _ in range(int(value)):
                 table[tabPointer] = index
                 tabPointer += 1
+
+def positionSort(table: np.ndarray):
+    """
+        A function to represent Position sort algorithm   
+
+    Args:
+        table (np.ndarray): array to be sorted
+    """
+
+    maxItem = np.max(table)
+
+    numberOfDigits = len(str(maxItem))
+
+    index = 1
+
+    for i in range(numberOfDigits):
+        countingSortForRadix(table, index)
+        index *= 10
+
+def countingSortForRadix(table: np.ndarray, sigIndex: int):
+    """
+        A helper function to the one above (position sort)
+    Args:
+        table (np.ndarray): array to be sorted
+        index (int): index of most significant digit
+    """
+ 
+    length = len(table)
+ 
+    output = list(np.zeros(length))
+    count = list(np.zeros(10))
+ 
+    for i in range(0, length):
+        index = table[i] // sigIndex
+        count[index % 10] += 1
+ 
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+ 
+    for k in range(length - 1, -1, -1):
+        index = table[k] // sigIndex
+        output[int(count[index % 10] - 1)] = table[k]
+        count[index % 10] -= 1
+
+    for j in range(0, len(table)):
+        table[j] = output[j]
