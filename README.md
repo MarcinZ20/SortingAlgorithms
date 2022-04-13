@@ -35,17 +35,3 @@ Projekt ma na celu implementacje i przedstawienie działania podstawowych algory
     ```console
     foo@bar:~$ pipenv install numpy
     ```
-
-### Kilka słów końcowych
-Algorytmy oczywiście pisałem samodzielnie, jendak zdarzyło się czasem spojrzeć w jakiś pseudo-kod ...
-
-Cały projekt jest oczywiście do zrobienia w dużo prostszy sposób, natomiast z uwagi na to, że uczę się programować obiektowo,
-starałem się napisać to w ten a nie inny sposób (z nadzieją na to, że z czasem uda mi się go jeszcze trochę rozwinąć)
-
-Mam nadzieje, że pomimo wszystko kod będzie w miarę przejrzysty :)
-
-Wszystkie implementacje algorytmów są w pliku SortingAlgorithms/algorithms.py
-
-#### Będę bardzo wdzięczny za wszystkie uwagi dotyczące zarówno algorytmów jak i samego kodu.
-
-## Pozdrawiam serdecznie!
