@@ -1,18 +1,18 @@
 import numpy as np
-import operator 
+import operator
 
 availableAlgorythms = {
-        1: "Bubble Sort",
-        2: "Insertion Sort",
-        3: "Selection Sort",
-        4: "Merge Sort",
-        5: "Quick Sort",
-        6: "Heap Sort",
-        7: "Bucket Sort",
-        8: "Counting Sort",
-        9: "Position Sort"
-    }
-    
+    1: "Bubble Sort",
+    2: "Insertion Sort",
+    3: "Selection Sort",
+    4: "Merge Sort",
+    5: "Quick Sort",
+    6: "Heap Sort",
+    7: "Bucket Sort",
+    8: "Counting Sort",
+    9: "Position Sort"
+}
+
 
 def bubbleSort(table: np.ndarray) -> None:
     """
@@ -60,7 +60,7 @@ def selectSort(table: np.ndarray) -> None:
             if value < min:
                 min = value
                 min_index = index + border
-        
+
         table[min_index] = table[i]
         table[i] = min
 
@@ -102,10 +102,6 @@ def mergeSort(table: np.ndarray) -> None:
             table[c] = right[r]
             r += 1
             c += 1
-        
-
-
-                ##### ---------------------------- TODO: Zadanie 2 ---------------------------- #####
 
 
 def quickSort(table: np.ndarray, left: int, right: int) -> None:
@@ -119,7 +115,7 @@ def quickSort(table: np.ndarray, left: int, right: int) -> None:
     """
 
     if left >= right:
-        return 
+        return
 
     pivot = partition(table, left, right)
     quickSort(table, left, pivot - 1)
@@ -143,8 +139,9 @@ def partition(table: np.ndarray, left: int, right: int) -> int:
         if table[i] <= pivot:
             j += 1
             table[i], table[j] = table[j], table[i]
-    
+
     return j
+
 
 def heapSort(table: np.ndarray) -> None:
     """
@@ -155,13 +152,14 @@ def heapSort(table: np.ndarray) -> None:
     """
 
     length = len(table)
-  
+
     for i in range(length//2, -1, -1):
         heapify(table, length, i)
-  
+
     for i in range(length-1, 0, -1):
         table[i], table[0] = table[0], table[i]
         heapify(table, i, 0)
+
 
 def heapify(table: int, length: int, head: int):
     """
@@ -172,9 +170,9 @@ def heapify(table: int, length: int, head: int):
         length (int): length of the array part
         head (int): head node 
     """
-    
-    left = 2 * head + 1 
-    right = 2 * head + 2 
+
+    left = 2 * head + 1
+    right = 2 * head + 2
 
     values = {head: table[head]}
 
@@ -190,6 +188,7 @@ def heapify(table: int, length: int, head: int):
     if largest != head:
         table[head], table[largest] = table[largest], table[head]
         heapify(table, length, largest)
+
 
 def bucketSort(table: np.ndarray) -> None:
     """
@@ -252,6 +251,7 @@ def countingSort(table: np.ndarray) -> None:
                 table[tabPointer] = index
                 tabPointer += 1
 
+
 def positionSort(table: np.ndarray):
     """
         A function to represent Position sort algorithm   
@@ -270,6 +270,7 @@ def positionSort(table: np.ndarray):
         countingSortForRadix(table, index)
         index *= 10
 
+
 def countingSortForRadix(table: np.ndarray, sigIndex: int):
     """
         A helper function to the one above (position sort)
@@ -277,19 +278,19 @@ def countingSortForRadix(table: np.ndarray, sigIndex: int):
         table (np.ndarray): array to be sorted
         index (int): index of most significant digit
     """
- 
+
     length = len(table)
- 
+
     output = list(np.zeros(length))
     count = list(np.zeros(10))
- 
+
     for i in range(0, length):
         index = table[i] // sigIndex
         count[index % 10] += 1
- 
+
     for i in range(1, 10):
         count[i] += count[i - 1]
- 
+
     for k in range(length - 1, -1, -1):
         index = table[k] // sigIndex
         output[int(count[index % 10] - 1)] = table[k]
