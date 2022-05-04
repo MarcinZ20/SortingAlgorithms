@@ -1,10 +1,11 @@
 # Algorytmy Sortowania
 
-Projekt ma na celu implementacje i przedstawienie działania podstawowych algorytmów sortowania. 
+Projekt ma na celu implementacje i przedstawienie działania podstawowych algorytmów sortowania. Rozwijany jest też UI.
 
 ### Wykorzystane technologie
  - Python 3
  - numpy
+ - Tkinter
 
 ### Funkcje i zastosowania
  - Sortowanie Bąbelkowe
